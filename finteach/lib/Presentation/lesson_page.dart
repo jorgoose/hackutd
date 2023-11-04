@@ -18,9 +18,13 @@ class LessonPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _buildCloseButton(context),
+                SizedBox(width: 8), // Added space before the progress bar
                 Expanded(
                   child: _buildProgressBar(),
                 ),
+                SizedBox(
+                    width:
+                        16), // Increased space between the progress bar and the heart
                 _buildHeartCount(context, heartCount: 5),
               ],
             ),
@@ -31,8 +35,8 @@ class LessonPage extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     Colors.green, // Lighter green gradient
-                    Color(0xFF11825C)
-                  ], // Darker green gradient
+                    Color(0xFF11825C) // Darker green gradient
+                  ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -43,8 +47,7 @@ class LessonPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     SizedBox(height: 24),
-                    _buildCard(context, 'Question 1 of 5'),
-                    _buildCard(context,
+                    _buildCombinedCard(context, 'Question 1 of 5',
                         'This is an example question, what is the answer for it?'),
                     SizedBox(height: 24),
                     Expanded(
@@ -58,18 +61,30 @@ class LessonPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: ElevatedButton(
-                        child: Text('Next Question'),
-                        onPressed: () {
-                          // Handle next question action
-                        },
-                      ),
-                    ),
                   ],
                 ),
+              ),
+            ),
+          ),
+          // Bottom bar with white background
+          Container(
+            color: Colors.white,
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 32.0,
+                      vertical: 16.0), // Increased padding for a bigger button
+                  textStyle:
+                      const TextStyle(fontSize: 18), // Increased font size
+                ),
+                child: Text('Next Question'),
+                onPressed: () {
+                  // Handle next question action
+                },
               ),
             ),
           ),
@@ -80,7 +95,7 @@ class LessonPage extends StatelessWidget {
 
   Widget _buildCloseButton(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.close, color: Colors.green),
+      icon: const Icon(Icons.close, color: Colors.green),
       onPressed: () {
         Navigator.of(context).pop();
       },
@@ -98,9 +113,9 @@ class LessonPage extends StatelessWidget {
   Widget _buildHeartCount(BuildContext context, {required int heartCount}) {
     return Row(
       children: [
-        Icon(Icons.favorite, color: Colors.red),
+        const Icon(Icons.favorite, color: Colors.red),
         SizedBox(width: 8),
-        Text('$heartCount', style: TextStyle(color: Colors.black)),
+        Text('$heartCount', style: const TextStyle(color: Colors.black)),
       ],
     );
   }
@@ -108,9 +123,9 @@ class LessonPage extends StatelessWidget {
   Widget _buildOption(BuildContext context, String option) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.symmetric(vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       child: ListTile(
-        title: Text(option, style: TextStyle(color: Colors.green)),
+        title: Text(option, style: const TextStyle(color: Colors.black)),
         onTap: () {
           // Handle option tap action
         },
@@ -118,15 +133,26 @@ class LessonPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context, String text) {
+  Widget _buildCombinedCard(
+      BuildContext context, String questionNumber, String questionText) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        child: Text(
-          text,
-          style: TextStyle(color: Colors.green),
+        child: RichText(
           textAlign: TextAlign.center,
+          text: TextSpan(
+            style: const TextStyle(fontSize: 14.0, color: Colors.black),
+            children: <TextSpan>[
+              TextSpan(
+                  text: '$questionNumber\n',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400, color: Colors.grey)),
+              TextSpan(
+                  text: questionText,
+                  style: TextStyle(fontWeight: FontWeight.bold, height: 1.5)),
+            ],
+          ),
         ),
       ),
     );
