@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/openai_service.dart';
+import 'package:finteach/Presentation/confetti.dart';
 
 class PracticePage extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class PracticePage extends StatefulWidget {
 
 class _PracticePageState extends State<PracticePage> {
   final TextEditingController _queryController = TextEditingController();
+  final GlobalKey<ConfettiButtonState> confettiKey = GlobalKey<ConfettiButtonState>(); // Define the key here
   String _response = "";
   bool _isLoading = false;
 
@@ -55,6 +57,15 @@ class _PracticePageState extends State<PracticePage> {
               child: SingleChildScrollView(
                 child: Text(_response),
               ),
+            ),
+            ConfettiButton(key: confettiKey),
+            FloatingActionButton(
+              onPressed: () {
+                confettiKey.currentState?.playConfetti(); // Use the key to call playConfetti
+              },
+              child: Icon(Icons.edit, color: Colors.black), 
+              backgroundColor: Colors.white,
+              tooltip: 'Practice',
             ),
           ],
         ),
