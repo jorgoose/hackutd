@@ -46,14 +46,6 @@ Future<List<Question>> loadQuestions(Chapters chapter) async {
   List<Future> futures = [
     ai.generateQuestions('', chapter.name, 1),
     ai.generateQuestions('', chapter.name, 1),
-    ai.generateQuestions('', chapter.name, 1),
-    ai.generateQuestions('', chapter.name, 1),
-    ai.generateQuestions('', chapter.name, 1),
-    ai.generateQuestions('', chapter.name, 1),
-    ai.generateQuestions('', chapter.name, 1),
-    ai.generateQuestions('', chapter.name, 1),
-    ai.generateQuestions('', chapter.name, 1),
-    ai.generateQuestions('', chapter.name, 1)
   ];
   List results = await Future.wait(futures);
   
