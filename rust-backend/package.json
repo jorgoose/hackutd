@@ -1,0 +1,11 @@
+{
+  "name": "rust-backend",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "npm run build:tailwind && cargo run",
+    "build:tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/output.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
