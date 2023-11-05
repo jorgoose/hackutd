@@ -134,7 +134,7 @@ Container(
               _hasPressedCheck = false; // Reset the check button state
               selectedOptionIndex = -1; // Reset the selected option
             } else {
-              // Handle the end of the questions list, e.g., navigate away or show a score screen
+              _showCompletionDialog(context, _confettiController);
             }
           });
         }
@@ -248,3 +248,44 @@ Widget _buildOption(BuildContext context, String option, int index) {
     );
   }
 }
+
+
+  void _showCompletionDialog(context, _confettiController) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // The user must tap the button to close the dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Congratulations!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                const Center(
+                  child: Text(
+                    "🏅",
+                    style: TextStyle(
+                      fontSize: 100, // Set a very large font size for the emoji
+                    ),
+                  ),
+                ),
+                const Text('You have completed all the questions!'),
+                const Text('Your progress has been amazing!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Go Home'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop(); // Go back to the previous screen
+                _confettiController.stop(); // Stop the confetti when the dialog is closed
+              },
+            ),
+          ],
+        );
+      },
+    );
+    // Start the confetti loop when the dialog is shown
+    _confettiController.play();
+  }

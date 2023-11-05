@@ -38,12 +38,7 @@ var rawData = {
       ],
       "answer": 1
     },
-    
-  ]
-};
-
-/*
-{
+    {
       "question": "Which of the following is considered a liability?",
       "options": [
         "A car loan",
@@ -53,6 +48,12 @@ var rawData = {
       ],
       "answer": 0
     },
+    
+  ]
+};
+
+/*
+
     {
       "question":
           "What does 'interest' mean in the context of a savings account?",
