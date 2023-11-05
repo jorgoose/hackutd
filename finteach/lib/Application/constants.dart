@@ -48,12 +48,6 @@ var rawData = {
       ],
       "answer": 0
     },
-    
-  ]
-};
-
-/*
-
     {
       "question":
           "What does 'interest' mean in the context of a savings account?",
@@ -94,4 +88,11 @@ var rawData = {
         "The process of deflating something"
       ],
       "answer": 0
-    }*/
+    }
+    
+  ]
+};
+
+/*
+
+    */
